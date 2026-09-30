@@ -1,0 +1,8 @@
+# Raw flight logs contain GPS tracks, tail number and avionics IDs - keep them local
+data/
+*.zip
+
+__pycache__/
+*.pyc
+.venv/
+venv/
