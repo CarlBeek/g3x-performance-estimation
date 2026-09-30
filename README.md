@@ -95,3 +95,7 @@ This is an empirical estimate from unplanned flight data – weight, CG, tempera
 technique all vary from flight to flight and none of it is controlled. Values far outside the
 altitudes you actually fly are extrapolations. It is **not** a substitute for your aircraft's
 POH or your own flight testing; don't use it for flight planning where margins matter.
+
+## License
+
+[MIT](LICENSE)
