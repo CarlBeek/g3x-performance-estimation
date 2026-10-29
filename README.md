@@ -32,7 +32,8 @@ Around this polar the script also fits:
 - **Power available** – full-throttle climb power, linear in σ (Gagg-Ferrar form), plus the
   absolute WOT ceiling from the 99th-percentile power in each altitude band.
 - **Pilot technique** – the climb IAS schedule, typical descent IAS and rate, and how close to
-  WOT cruise is flown at altitude. The table therefore describes how the aircraft is *actually
+  WOT cruise is flown at altitude (from sustained level legs of 5 min or more, so local
+  flying at reduced power doesn't count as cruise). The table therefore describes how the aircraft is *actually
   flown*, not a theoretical optimum.
 - **Fuel flow** – linear in power, separately for climb, cruise and descent, which captures how
   the mixture is leaned in each phase.
@@ -79,15 +80,15 @@ The script prints the fitted constants and writes the table to CSV.
 | `desc_KIAS`, `desc_KTAS`, `desc_GPH`, `desc_FPM` | cruise descent at the pilot's usual speed and rate, capped at V<sub>NE</sub> |
 | `*_lo`, `*_hi` | 10th / 90th percentile bootstrap bounds for cruise KTAS and climb FPM |
 
-Example output from ~55 flights in an RV-6 (selected rows):
+Example output from ~60 flights in an RV-6 (selected rows):
 
 | DA (ft) | Cruise % | Cruise KTAS | Cruise GPH | Climb KIAS | Climb FPM | Climb GPH | Descent KTAS | Descent FPM |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 0      | 75.0 | 153 | 9.0 | 121 | 1338 | 12.7 | 137 | −495 |
-| 5,000  | 71.7 | 158 | 8.7 | 119 | 1004 | 11.1 | 148 | −495 |
-| 10,000 | 63.8 | 157 | 8.0 | 117 |  690 |  9.6 | 159 | −495 |
-| 15,000 | 56.7 | 156 | 7.3 | 115 |  394 |  8.4 | 173 | −553 |
-| 20,000 | 50.4 | 153 | 6.8 | 113 |  110 |  7.3 | 183 | −847 |
+| 0      | 75.0 | 154 | 8.9 | 121 | 1420 | 13.0 | 139 | −502 |
+| 5,000  | 75.0 | 161 | 8.9 | 119 | 1053 | 11.3 | 150 | −502 |
+| 10,000 | 68.3 | 162 | 8.3 | 117 |  708 |  9.9 | 162 | −502 |
+| 15,000 | 60.5 | 160 | 7.6 | 116 |  382 |  8.6 | 175 | −502 |
+| 20,000 | 53.6 | 158 | 6.9 | 114 |   72 |  7.4 | 183 | −727 |
 
 ## Caveats
 

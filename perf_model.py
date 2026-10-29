@@ -141,9 +141,12 @@ class Model:
         m = g.agg(n=("pwr", "size"), da=("dalt", "median"), p99=("pwr", lambda x: x.quantile(0.99)))
         m = m[m.n > 500]
         self.pmax = np.polyfit(sigma(m.da), m.p99, 1)
-        # cruise: pilot flies ~75% down low, near-WOT at cruise RPM up high
+        # cruise: pilot flies ~75% down low, near-WOT at cruise RPM up high. Only sustained level
+        # legs (>= 5 min of consecutive steady samples) count, so local/sightseeing flying at
+        # reduced power doesn't pull the cruise setting down.
         lv = s[(s.vs_m.abs() < 100)]
-        hi = lv[lv.dalt_m > 9000]
+        leg = ((lv.flight != lv.flight.shift()) | (np.diff(lv.index, prepend=-1) != 10)).cumsum()
+        hi = lv[(lv.groupby(leg.values).flight.transform("size") >= 30) & (lv.dalt_m > 9000)]
         self.cruise_frac = float(np.median(hi.pwr_m / np.polyval(self.pmax, hi.sig)))
         # climb IAS schedule the pilot actually flies
         self.climb_ias = np.polyfit(cl.dalt_m, cl.ias_m, 1)
